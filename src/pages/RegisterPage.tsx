@@ -44,16 +44,16 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-white to-honey-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-secondary-100">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
-              <UserPlus className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-honey-500 rounded-full mb-4">
+              <UserPlus className="w-8 h-8 text-charcoal-900" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Create your account</h1>
-            <p className="text-gray-600">Join our freelancing platform today</p>
+            <h1 className="text-2xl font-bold text-charcoal-900 mb-2">Create your account</h1>
+            <p className="text-charcoal-600">Join our freelancing platform today</p>
           </div>
 
           {/* Registration Form */}
@@ -115,17 +115,17 @@ export const RegisterPage: React.FC = () => {
                 <input
                   type="checkbox"
                   {...register('terms')}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-honey-600 border-secondary-300 rounded focus:ring-honey-500"
                 />
               </div>
               <div className="text-sm">
-                <label className="text-gray-700">
+                <label className="text-charcoal-700">
                   I agree to the{' '}
-                  <Link to="/terms" className="text-blue-600 hover:text-blue-800">
+                  <Link to="/terms" className="text-honey-600 hover:text-honey-700">
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link to="/privacy" className="text-blue-600 hover:text-blue-800">
+                  <Link to="/privacy" className="text-honey-600 hover:text-honey-700">
                     Privacy Policy
                   </Link>
                 </label>
@@ -137,7 +137,7 @@ export const RegisterPage: React.FC = () => {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full bg-honey-500 text-charcoal-900 hover:bg-honey-400"
               loading={isSubmitting}
               disabled={isSubmitting}
             >
@@ -153,11 +153,11 @@ export const RegisterPage: React.FC = () => {
 
           {/* Sign in link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-charcoal-600">
               Already have an account?{' '}
               <Link 
                 to="/login"
-                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                className="text-honey-600 hover:text-honey-700 font-medium transition-colors"
               >
                 Sign in
               </Link>
@@ -169,7 +169,7 @@ export const RegisterPage: React.FC = () => {
         <div className="mt-6 text-center">
           <Link 
             to="/"
-            className="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+            className="inline-flex items-center text-charcoal-500 hover:text-charcoal-700 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to home

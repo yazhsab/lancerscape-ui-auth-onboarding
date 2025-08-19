@@ -40,16 +40,16 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-white to-honey-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-secondary-100">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
-              <LogIn className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-honey-500 rounded-full mb-4">
+              <LogIn className="w-8 h-8 text-charcoal-900" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
-            <p className="text-gray-600">Sign in to your account to continue</p>
+            <h1 className="text-2xl font-bold text-charcoal-900 mb-2">Welcome back</h1>
+            <p className="text-charcoal-600">Sign in to your account to continue</p>
           </div>
 
           {/* Login Form */}
@@ -75,7 +75,7 @@ export const LoginPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <Link 
                 to="/forgot-password"
-                className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                className="text-sm text-honey-600 hover:text-honey-700 transition-colors"
               >
                 Forgot your password?
               </Link>
@@ -83,7 +83,7 @@ export const LoginPage: React.FC = () => {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full bg-honey-500 text-charcoal-900 hover:bg-honey-400"
               loading={isSubmitting}
               disabled={isSubmitting}
             >
@@ -98,11 +98,11 @@ export const LoginPage: React.FC = () => {
 
           {/* Sign up link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-charcoal-600">
               Don't have an account?{' '}
               <Link 
                 to="/register"
-                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                className="text-honey-600 hover:text-honey-700 font-medium transition-colors"
               >
                 Sign up
               </Link>
@@ -114,7 +114,7 @@ export const LoginPage: React.FC = () => {
         <div className="mt-6 text-center">
           <Link 
             to="/"
-            className="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+            className="inline-flex items-center text-charcoal-500 hover:text-charcoal-700 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to home
