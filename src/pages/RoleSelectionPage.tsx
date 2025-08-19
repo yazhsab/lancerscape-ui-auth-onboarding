@@ -77,23 +77,31 @@ export const RoleSelectionPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 flex items-center justify-center p-4 bg-animated">
+      {/* Floating Background Shapes */}
+      <div className="floating-shapes">
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+      </div>
+
       <div className="w-full max-w-4xl">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative z-10 animate-fade-in">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Choose your role</h1>
           <p className="text-xl text-gray-600">How do you want to use our platform?</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8 relative z-10">
           {roles.map((role) => (
             <div
               key={role.id}
               onClick={() => handleRoleSelection(role.id)}
               className={`
-                relative p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 transform hover:scale-105
+                relative p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm
                 ${selectedRole === role.id 
                   ? 'border-blue-500 bg-blue-50 shadow-lg' 
-                  : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                  : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }
               `}
             >

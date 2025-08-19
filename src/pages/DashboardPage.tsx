@@ -33,9 +33,17 @@ export const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 bg-animated">
+      {/* Floating Background Shapes */}
+      <div className="floating-shapes">
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+      </div>
+
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white/95 backdrop-blur-sm shadow-sm border-b relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
@@ -48,10 +56,10 @@ export const DashboardPage: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="max-w-3xl">
           {/* Welcome Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-100">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-8 mb-8 border border-gray-100 animate-scale-in">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Welcome, {user?.first_name}! 👋
             </h2>
@@ -79,7 +87,7 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           {/* Profile Information */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-gray-100 animate-fade-in" style={{animationDelay: '0.3s'}}>
             <h3 className="text-xl font-bold text-gray-900 mb-6">Profile Information</h3>
             
             <div className="space-y-4">

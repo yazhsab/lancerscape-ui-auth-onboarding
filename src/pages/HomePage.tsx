@@ -5,9 +5,30 @@ import { Button } from '../components/common/Button';
 
 export const HomePage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 bg-animated">
+      {/* Floating Background Shapes */}
+      <div className="floating-shapes">
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+        <div className="floating-shape"></div>
+      </div>
+      
+      {/* Particle Effect */}
+      <div className="particles">
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+      </div>
+
       {/* Navigation */}
-      <nav className="bg-charcoal-900/95 backdrop-blur-sm border-b border-charcoal-700 sticky top-0 z-50">
+      <nav className="bg-charcoal-900/95 backdrop-blur-sm border-b border-charcoal-700 sticky top-0 z-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
@@ -30,19 +51,19 @@ export const HomePage: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal-900 mb-6 animate-slide-up">
             Connect with{' '}
             <span className="bg-gradient-to-r from-honey-500 to-accent-500 bg-clip-text text-transparent">
               talented freelancers
             </span>
           </h1>
-          <p className="text-xl text-charcoal-700 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-charcoal-700 mb-8 max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.3s'}}>
             Join the world's largest freelancing platform where businesses and independent professionals connect and collaborate remotely.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{animationDelay: '0.6s'}}>
             <Link to="/register">
               <Button size="lg" className="px-8 bg-honey-500 text-charcoal-900 hover:bg-honey-400">
                 Get started
@@ -59,10 +80,10 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Features */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-secondary-100">
+            <div className="text-center p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-secondary-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-honey-100 rounded-full mb-4">
                 <Users className="w-6 h-6 text-honey-600" />
               </div>
@@ -72,7 +93,7 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
             
-            <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-secondary-100">
+            <div className="text-center p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-secondary-100 hover:shadow-xl transition-all duration-300 hover:scale-105" style={{animationDelay: '0.2s'}}>
               <div className="inline-flex items-center justify-center w-12 h-12 bg-accent-100 rounded-full mb-4">
                 <Briefcase className="w-6 h-6 text-accent-600" />
               </div>
@@ -82,7 +103,7 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
             
-            <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-secondary-100">
+            <div className="text-center p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-secondary-100 hover:shadow-xl transition-all duration-300 hover:scale-105" style={{animationDelay: '0.4s'}}>
               <div className="inline-flex items-center justify-center w-12 h-12 bg-success-100 rounded-full mb-4">
                 <Star className="w-6 h-6 text-success-600" />
               </div>
