@@ -14,7 +14,7 @@ export const HomePage: React.FC = () => {
               <div className="w-8 h-8 bg-honey-500 rounded-lg flex items-center justify-center">
                 <Briefcase className="w-5 h-5 text-charcoal-900" />
               </div>
-              <span className="text-xl font-bold text-white">FreelanceHub</span>
+              <span className="text-xl font-bold text-white">LancerScape</span>
             </div>
             
             <div className="flex items-center space-x-4">
