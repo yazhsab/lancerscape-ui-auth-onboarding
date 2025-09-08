@@ -88,7 +88,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (userData: RegisterRequest): Promise<void> => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await AuthService.register(userData);
+      
+      // Remove confirmPassword before sending to backend
+      const { confirmPassword, ...backendData } = userData.data.attributes;
+      const requestData = {
+        data: {
+          type: userData.data.type,
+          attributes: backendData
+        }
+      };
+      
+      const response = await AuthService.register(requestData);
       
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));

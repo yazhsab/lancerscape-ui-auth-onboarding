@@ -15,7 +15,7 @@ export const registerSchema = z.object({
   confirmPassword: z.string(),
   first_name: z.string().min(2, 'First name must be at least 2 characters'),
   last_name: z.string().min(2, 'Last name must be at least 2 characters'),
-  full_phone_number: z.string().regex(/^\+\d{10,15}$/, 'Please enter a valid phone number with country code (e.g., +1234567890)'),
+  full_phone_number: z.string().regex(/^\+\d{10,15}$/, 'Please enter a valid phone number with country code (e.g., +918660372848)'),
   terms: z.boolean().refine(val => val === true, 'You must accept the terms and conditions')
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords don't match",
