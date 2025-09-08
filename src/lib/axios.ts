@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-// Check if we're in development or if we should use HTTP
+// Use proxy in production, direct connection in development
 const isDevelopment = import.meta.env.DEV;
-const forceHTTP = import.meta.env.VITE_FORCE_HTTP === 'true';
-
-// Use HTTP in development or when explicitly forced
-const baseURL = isDevelopment || forceHTTP 
+const baseURL = isDevelopment 
   ? 'http://ec2-3-238-114-176.compute-1.amazonaws.com:3000'
-  : import.meta.env.VITE_API_BASE_URL || 'http://ec2-3-238-114-176.compute-1.amazonaws.com:3000';
+  : '/api'; // Use proxy in production
 
 const api = axios.create({
   baseURL,

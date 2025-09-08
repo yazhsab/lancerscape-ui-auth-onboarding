@@ -217,29 +217,16 @@ The application is configured for automatic deployment to Bolt Hosting (Netlify)
 
 ### Mixed Content Issues
 
-If your backend runs on HTTP and your frontend is deployed on HTTPS, browsers will block the requests due to mixed content security policies.
+**Solution Implemented**: The application now uses a proxy configuration to handle HTTP backend communication from HTTPS frontend.
 
-**Solutions:**
+**How it works:**
+- **Development**: Direct connection to HTTP backend
+- **Production**: All API calls go through `/api/*` proxy routes
+- **Netlify**: Automatically proxies `/api/*` to your HTTP backend
 
-1. **Recommended: Add HTTPS to your backend**
-   ```bash
-   # Using Let's Encrypt (free SSL certificate)
-   sudo apt update
-   sudo apt install certbot
-   sudo certbot --nginx -d your-domain.com
-   ```
-
-2. **Development: Use HTTP for frontend**
-   - Access the site via: `http://localhost:5173` during development
-   - Or deploy to an HTTP-only hosting service
-
-3. **Temporary: Use a proxy service**
-   - Use services like ngrok to create HTTPS tunnel to your HTTP backend
-   - Or use a reverse proxy like Cloudflare
-
-4. **Browser Override (Not recommended for production)**
-   - Chrome: Launch with `--disable-web-security --user-data-dir=/tmp/chrome_dev`
-   - This is only for development/testing purposes
+**Additional Options:**
+- For better performance, consider adding HTTPS to your backend
+- The proxy solution works seamlessly with your current HTTP setup
 
 ### Tailwind Configuration
 Custom design system configured in `tailwind.config.js` with:

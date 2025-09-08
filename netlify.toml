@@ -1,0 +1,27 @@
+# Netlify configuration for proxy and redirects
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Proxy API requests to avoid mixed content issues
+[[redirects]]
+  from = "/api/*"
+  to = "http://ec2-3-238-114-176.compute-1.amazonaws.com:3000/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
