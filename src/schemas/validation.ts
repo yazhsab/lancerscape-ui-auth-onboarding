@@ -38,12 +38,35 @@ export const resetPasswordSchema = z.object({
   path: ["confirmPassword"]
 });
 
-export const activationSchema = z.object({
-  token: z.string().min(1, 'Activation token is required'),
+export const profileUpdateSchema = z.object({
+  first_name: z.string().min(2, 'First name must be at least 2 characters').optional(),
+  last_name: z.string().min(2, 'Last name must be at least 2 characters').optional(),
+  new_phone_number: z.string().regex(/^\+\d{10,15}$/, 'Please enter a valid phone number with country code').optional(),
+  current_password: z.string().optional(),
+  new_password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number')
+    .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character')
+    .optional(),
+});
+
+export const changePasswordSchema = z.object({
+  current_password: z.string().min(1, 'Current password is required'),
+  new_password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number')
+    .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character'),
+  confirm_password: z.string(),
+}).refine(data => data.new_password === data.confirm_password, {
+  message: "Passwords don't match",
+  path: ["confirm_password"]
 });
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
-export type ActivationFormData = z.infer<typeof activationSchema>;
+export type ProfileUpdateFormData = z.infer<typeof profileUpdateSchema>;
+export type ChangePasswordFormData = z.infer<typeof changePasswordSchema>;

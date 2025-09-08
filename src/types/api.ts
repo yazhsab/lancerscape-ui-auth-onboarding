@@ -1,7 +1,13 @@
 export interface ApiResponse<T> {
   data: T;
-  message?: string;
-  status: number;
+  meta?: {
+    token?: string;
+    message?: string;
+  };
+  errors?: Array<{
+    detail: string;
+    source?: any;
+  }>;
 }
 
 export interface LoginRequest {
@@ -30,11 +36,16 @@ export interface RegisterRequest {
 
 export interface User {
   id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  role: 'freelancer' | 'client' | 'sponsor';
-  is_activated: boolean;
+  type: string;
+  attributes: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    full_phone_number: string;
+    is_activated: boolean;
+    created_at: string;
+    updated_at: string;
+  };
 }
 
 export interface AuthResponse {
@@ -53,12 +64,32 @@ export interface SocialAuthRequest {
   };
 }
 
-export interface PasswordResetRequest {
-  email: string;
+export interface ForgotPasswordRequest {
+  data: {
+    email: string;
+  };
 }
 
-export interface PasswordResetConfirm {
-  token: string;
-  password: string;
-  confirmPassword: string;
+export interface ResetPasswordRequest {
+  data: {
+    reset_password_token: string;
+    password: string;
+    password_confirmation: string;
+  };
+}
+
+export interface ProfileUpdateRequest {
+  data: {
+    first_name?: string;
+    last_name?: string;
+    new_phone_number?: string;
+    current_password?: string;
+    new_password?: string;
+  };
+}
+
+export interface CountryCode {
+  country_name: string;
+  country_code: string;
+  flag_url: string;
 }

@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { KeyRound, ArrowLeft, Send } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
-import { AuthService } from '../services/auth.service';
 import { forgotPasswordSchema, ForgotPasswordFormData } from '../schemas/validation';
-import { toast } from 'react-hot-toast';
 
 export const ForgotPasswordPage: React.FC = () => {
   const navigate = useNavigate();
+  const { forgotPassword } = useAuth();
 
   const {
     register,
@@ -22,8 +22,11 @@ export const ForgotPasswordPage: React.FC = () => {
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
     try {
-      await AuthService.requestPasswordReset(data);
-      toast.success('Password reset email sent! Check your inbox.');
+      await forgotPassword({
+        data: {
+          email: data.email
+        }
+      });
       navigate('/login');
     } catch (error) {
       // Error is handled by the interceptor

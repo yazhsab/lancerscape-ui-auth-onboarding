@@ -12,7 +12,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
-    config.headers.token = token;
+    config.headers['token'] = token;
   }
   return config;
 });
@@ -21,7 +21,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message = error.response?.data?.message || 'Something went wrong';
+    const message = error.response?.data?.errors?.[0]?.detail || 
+                   error.response?.data?.message || 
+                   'Something went wrong';
     toast.error(message);
     
     // Handle token expiration

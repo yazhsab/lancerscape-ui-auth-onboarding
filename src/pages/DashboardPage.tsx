@@ -6,32 +6,6 @@ import { LogOut, User, Mail, Phone, Shield } from 'lucide-react';
 export const DashboardPage: React.FC = () => {
   const { user, logout } = useAuth();
 
-  const getRoleIcon = (role: string) => {
-    switch (role) {
-      case 'freelancer':
-        return <User className="w-5 h-5" />;
-      case 'client':
-        return <Shield className="w-5 h-5" />;
-      case 'sponsor':
-        return <Shield className="w-5 h-5" />;
-      default:
-        return <User className="w-5 h-5" />;
-    }
-  };
-
-  const getRoleColor = (role: string) => {
-    switch (role) {
-      case 'freelancer':
-        return 'bg-blue-100 text-blue-800';
-      case 'client':
-        return 'bg-green-100 text-green-800';
-      case 'sponsor':
-        return 'bg-purple-100 text-purple-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 bg-animated">
       {/* Floating Background Shapes */}
@@ -61,7 +35,7 @@ export const DashboardPage: React.FC = () => {
           {/* Welcome Section */}
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-8 mb-8 border border-gray-100 animate-scale-in">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Welcome, {user?.first_name}! 👋
+              Welcome, {user?.attributes?.first_name}! 👋
             </h2>
             <p className="text-gray-600 mb-6">
               Your account has been successfully created and you're ready to start your journey on our platform.
@@ -71,17 +45,9 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center space-x-2 mb-6">
               <div className={`
                 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-                ${user?.is_activated ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}
+                ${user?.attributes?.is_activated ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}
               `}>
-                {user?.is_activated ? 'Account Verified' : 'Pending Verification'}
-              </div>
-              
-              <div className={`
-                inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-                ${getRoleColor(user?.role || '')}
-              `}>
-                {getRoleIcon(user?.role || '')}
-                <span className="ml-1 capitalize">{user?.role}</span>
+                {user?.attributes?.is_activated ? 'Account Verified' : 'Pending Verification'}
               </div>
             </div>
           </div>
@@ -96,7 +62,7 @@ export const DashboardPage: React.FC = () => {
                 <div>
                   <p className="text-sm text-gray-500">Full Name</p>
                   <p className="font-medium text-gray-900">
-                    {user?.first_name} {user?.last_name}
+                    {user?.attributes?.first_name} {user?.attributes?.last_name}
                   </p>
                 </div>
               </div>
@@ -105,15 +71,15 @@ export const DashboardPage: React.FC = () => {
                 <Mail className="w-5 h-5 text-gray-400" />
                 <div>
                   <p className="text-sm text-gray-500">Email Address</p>
-                  <p className="font-medium text-gray-900">{user?.email}</p>
+                  <p className="font-medium text-gray-900">{user?.attributes?.email}</p>
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
-                <Shield className="w-5 h-5 text-gray-400" />
+                <Phone className="w-5 h-5 text-gray-400" />
                 <div>
-                  <p className="text-sm text-gray-500">Account Role</p>
-                  <p className="font-medium text-gray-900 capitalize">{user?.role}</p>
+                  <p className="text-sm text-gray-500">Phone Number</p>
+                  <p className="font-medium text-gray-900">{user?.attributes?.full_phone_number}</p>
                 </div>
               </div>
             </div>

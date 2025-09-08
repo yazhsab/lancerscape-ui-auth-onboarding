@@ -31,9 +31,11 @@ export const ResetPasswordPage: React.FC = () => {
 
     try {
       await AuthService.resetPassword({
-        token,
-        password: data.password,
-        confirmPassword: data.confirmPassword
+        data: {
+          reset_password_token: token,
+          password: data.password,
+          password_confirmation: data.confirmPassword
+        }
       });
       toast.success('Password reset successful!');
       navigate('/login');

@@ -21,12 +21,9 @@ export const VerificationPage: React.FC = () => {
   }, [countdown]);
 
   const handleActivation = async () => {
-    // In a real implementation, you would get the token from email link or user input
-    const token = 'sample-activation-token'; // This would come from URL params or user input
-    
     setIsActivating(true);
     try {
-      await AuthService.activateAccount(token);
+      await AuthService.activateAccount();
       toast.success('Account activated successfully!');
       navigate('/dashboard');
     } catch (error) {

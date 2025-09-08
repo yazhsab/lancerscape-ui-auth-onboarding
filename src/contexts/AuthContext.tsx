@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { User, LoginRequest, RegisterRequest, SocialAuthRequest } from '../types/api';
+import { User, LoginRequest, RegisterRequest, SocialAuthRequest, ForgotPasswordRequest } from '../types/api';
 import { AuthService } from '../services/auth.service';
 import { toast } from 'react-hot-toast';
 
@@ -13,8 +13,9 @@ interface AuthContextType extends AuthState {
   login: (credentials: LoginRequest) => Promise<void>;
   register: (userData: RegisterRequest) => Promise<void>;
   socialAuth: (socialData: SocialAuthRequest) => Promise<void>;
+  forgotPassword: (data: ForgotPasswordRequest) => Promise<void>;
   logout: () => void;
-  refreshAuth: () => Promise<void>;
+  loadProfile: () => Promise<void>;
 }
 
 type AuthAction = 
@@ -116,6 +117,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const forgotPassword = async (data: ForgotPasswordRequest): Promise<void> => {
+    try {
+      await AuthService.requestPasswordReset(data);
+      toast.success('Password reset email sent!');
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const logout = (): void => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -123,7 +133,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     toast.success('Logged out successfully');
   };
 
-  const refreshAuth = async (): Promise<void> => {
+  const loadProfile = async (): Promise<void> => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -131,8 +141,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
       }
 
-      const response = await AuthService.verifyToken();
-      dispatch({ type: 'SET_USER', payload: response.user });
+      const profile = await AuthService.getProfile();
+      dispatch({ type: 'SET_USER', payload: profile });
     } catch (error) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -149,7 +159,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         try {
           const user = JSON.parse(storedUser);
           dispatch({ type: 'SET_USER', payload: user });
-          await refreshAuth();
+          await loadProfile();
         } catch (error) {
           logout();
         }
@@ -166,8 +176,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     socialAuth,
+    forgotPassword,
     logout,
-    refreshAuth,
+    loadProfile,
   };
 
   return (

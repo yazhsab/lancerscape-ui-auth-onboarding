@@ -4,46 +4,84 @@ import {
   RegisterRequest, 
   AuthResponse, 
   SocialAuthRequest,
-  PasswordResetRequest,
-  PasswordResetConfirm,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  ProfileUpdateRequest,
+  CountryCode,
   ApiResponse 
 } from '../types/api';
 
 export class AuthService {
   static async login(credentials: LoginRequest): Promise<AuthResponse> {
-    const response = await api.post<ApiResponse<AuthResponse>>('/login/login', credentials);
-    return response.data.data;
+    const response = await api.post<ApiResponse<any>>('/login/login', credentials);
+    return {
+      user: response.data.data,
+      token: response.data.meta?.token || ''
+    };
   }
 
   static async register(userData: RegisterRequest): Promise<AuthResponse> {
-    const response = await api.post<ApiResponse<AuthResponse>>('/account/accounts', userData);
-    return response.data.data;
+    const response = await api.post<ApiResponse<any>>('/account/accounts', userData);
+    return {
+      user: response.data.data,
+      token: response.data.meta?.token || ''
+    };
   }
 
   static async socialAuth(socialData: SocialAuthRequest): Promise<AuthResponse> {
-    const response = await api.post<ApiResponse<AuthResponse>>('/login/login', socialData);
+    const response = await api.post<ApiResponse<any>>('/login/login', socialData);
+    return {
+      user: response.data.data,
+      token: response.data.meta?.token || ''
+    };
+  }
+
+  static async activateAccount(): Promise<void> {
+    await api.get('/account/accounts/email_confirmation');
+  }
+
+  static async requestPasswordReset(data: ForgotPasswordRequest): Promise<void> {
+    await api.post('/forgot_password/forgot_password', data);
+  }
+
+  static async resetPassword(data: ResetPasswordRequest): Promise<void> {
+    await api.post('/forgot_password/reset_password', data);
+  }
+
+  static async getProfile(): Promise<any> {
+    const response = await api.get<ApiResponse<any>>('/profile/profile');
     return response.data.data;
   }
 
-  static async activateAccount(token: string): Promise<void> {
-    await api.post('/account/activation', { token });
-  }
-
-  static async requestPasswordReset(data: PasswordResetRequest): Promise<void> {
-    await api.post('/auth/forgot-password', data);
-  }
-
-  static async resetPassword(data: PasswordResetConfirm): Promise<void> {
-    await api.post('/auth/reset-password', data);
-  }
-
-  static async verifyToken(): Promise<AuthResponse> {
-    const response = await api.get<ApiResponse<AuthResponse>>('/auth/verify');
+  static async updateProfile(data: ProfileUpdateRequest): Promise<any> {
+    const response = await api.put<ApiResponse<any>>('/profile/profile', data);
     return response.data.data;
   }
 
-  static async refreshToken(): Promise<AuthResponse> {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/refresh');
+  static async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    await api.put('/profile/password', {
+      data: {
+        current_password: currentPassword,
+        new_password: newPassword
+      }
+    });
+  }
+
+  static async validatePhoneChange(newPhoneNumber: string): Promise<void> {
+    await api.post('/profile/change_phone_validation', {
+      data: {
+        new_phone_number: newPhoneNumber
+      }
+    });
+  }
+
+  static async getCountryCodes(): Promise<CountryCode[]> {
+    const response = await api.get<ApiResponse<CountryCode[]>>('/account/accounts/country_code_and_flag');
+    return response.data.data;
+  }
+
+  static async getValidationRules(): Promise<any> {
+    const response = await api.get<ApiResponse<any>>('/profile/validations');
     return response.data.data;
   }
 }
