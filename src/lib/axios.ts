@@ -29,6 +29,8 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.error('API Error:', error.response?.data || error.message); // Debug log
+    
     // Handle network errors (like mixed content)
     if (error.code === 'ERR_NETWORK' || error.message.includes('Mixed Content')) {
       toast.error('Unable to connect to server. Please ensure the backend is accessible.');

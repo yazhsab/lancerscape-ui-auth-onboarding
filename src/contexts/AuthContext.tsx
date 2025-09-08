@@ -74,12 +74,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       dispatch({ type: 'SET_LOADING', payload: true });
       const response = await AuthService.login(credentials);
       
+      console.log('Auth response:', response); // Debug log
+      
+      if (!response.token) {
+        throw new Error('No token received from server');
+      }
+      
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       
       dispatch({ type: 'SET_USER', payload: response.user });
       toast.success('Login successful!');
     } catch (error) {
+      console.error('Login error:', error); // Debug log
       dispatch({ type: 'SET_LOADING', payload: false });
       throw error;
     }

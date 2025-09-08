@@ -14,9 +14,10 @@ import {
 export class AuthService {
   static async login(credentials: LoginRequest): Promise<AuthResponse> {
     const response = await api.post<ApiResponse<any>>('/login/login', credentials);
+    console.log('Login response:', response.data); // Debug log
     return {
       user: response.data.data,
-      token: response.data.meta?.token || ''
+      token: response.data.meta?.token || response.data.token || ''
     };
   }
 

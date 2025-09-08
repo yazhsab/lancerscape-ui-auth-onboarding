@@ -16,6 +16,8 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 }) => {
   const { isAuthenticated, loading } = useAuth();
 
+  console.log('ProtectedRoute - isAuthenticated:', isAuthenticated, 'loading:', loading); // Debug log
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -25,10 +27,12 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (requireAuth && !isAuthenticated) {
+    console.log('Redirecting to login - not authenticated'); // Debug log
     return <Navigate to={redirectTo} replace />;
   }
 
   if (!requireAuth && isAuthenticated) {
+    console.log('Redirecting to dashboard - already authenticated'); // Debug log
     return <Navigate to="/dashboard" replace />;
   }
 

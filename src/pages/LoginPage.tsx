@@ -24,6 +24,7 @@ export const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      console.log('Submitting login:', data); // Debug log
       await login({
         data: {
           type: "email_account",
@@ -33,8 +34,10 @@ export const LoginPage: React.FC = () => {
           }
         }
       });
+      console.log('Login successful, navigating to dashboard'); // Debug log
       navigate('/dashboard');
     } catch (error) {
+      console.error('Login submission error:', error); // Debug log
       // Error is handled by the interceptor
     }
   };
