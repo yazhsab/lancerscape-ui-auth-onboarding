@@ -30,7 +30,7 @@ export interface RegisterRequest {
       full_phone_number: string;
       email: string;
       password: string;
-      confirmPassword?: string; // Only used for frontend validation, not sent to backend
+      password_confirmation: string;
     };
   };
 }

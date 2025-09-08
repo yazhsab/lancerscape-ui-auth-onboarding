@@ -89,16 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
       
-      // Remove confirmPassword before sending to backend
-      const { confirmPassword, ...backendData } = userData.data.attributes;
-      const requestData = {
-        data: {
-          type: userData.data.type,
-          attributes: backendData
-        }
-      };
-      
-      const response = await AuthService.register(requestData);
+      const response = await AuthService.register(userData);
       
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));

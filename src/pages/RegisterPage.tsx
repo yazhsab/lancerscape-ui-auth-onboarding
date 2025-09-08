@@ -34,7 +34,7 @@ export const RegisterPage: React.FC = () => {
             full_phone_number: data.full_phone_number,
             email: data.email,
             password: data.password,
-            confirmPassword: data.confirmPassword
+            password_confirmation: data.confirmPassword
           }
         }
       });

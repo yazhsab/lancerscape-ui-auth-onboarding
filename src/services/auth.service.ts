@@ -21,22 +21,7 @@ export class AuthService {
   }
 
   static async register(userData: RegisterRequest): Promise<AuthResponse> {
-    // Transform the form data to match backend API structure
-    const requestBody = {
-      data: {
-        type: "email_account",
-        attributes: {
-          first_name: userData.data.attributes.first_name,
-          last_name: userData.data.attributes.last_name,
-          full_phone_number: userData.data.attributes.full_phone_number,
-          email: userData.data.attributes.email,
-          password: userData.data.attributes.password
-          // Note: confirmPassword is not sent to backend - it's only for frontend validation
-        }
-      }
-    };
-    
-    const response = await api.post<ApiResponse<any>>('/account/accounts', requestBody);
+    const response = await api.post<ApiResponse<any>>('/account/accounts', userData);
     return {
       user: response.data.data,
       token: response.data.meta?.token || ''
