@@ -212,6 +212,34 @@ The application is configured for automatic deployment to Bolt Hosting (Netlify)
 ### Environment Variables
 - `VITE_API_BASE_URL` - Backend API base URL
 - `VITE_GOOGLE_CLIENT_ID` - Google OAuth client ID
+- `VITE_FORCE_HTTP` - Set to 'true' to force HTTP in production (not recommended)
+- `VITE_FORCE_HTTP` - Set to 'true' to force HTTP in production (not recommended)
+
+### Mixed Content Issues
+
+If your backend runs on HTTP and your frontend is deployed on HTTPS, browsers will block the requests due to mixed content security policies.
+
+**Solutions:**
+
+1. **Recommended: Add HTTPS to your backend**
+   ```bash
+   # Using Let's Encrypt (free SSL certificate)
+   sudo apt update
+   sudo apt install certbot
+   sudo certbot --nginx -d your-domain.com
+   ```
+
+2. **Development: Use HTTP for frontend**
+   - Access the site via: `http://localhost:5173` during development
+   - Or deploy to an HTTP-only hosting service
+
+3. **Temporary: Use a proxy service**
+   - Use services like ngrok to create HTTPS tunnel to your HTTP backend
+   - Or use a reverse proxy like Cloudflare
+
+4. **Browser Override (Not recommended for production)**
+   - Chrome: Launch with `--disable-web-security --user-data-dir=/tmp/chrome_dev`
+   - This is only for development/testing purposes
 
 ### Tailwind Configuration
 Custom design system configured in `tailwind.config.js` with:

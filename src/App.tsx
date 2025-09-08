@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { NetworkStatus } from './components/common/NetworkStatus';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -111,6 +112,9 @@ function AppContent() {
                 },
               }}
             />
+
+            {/* Network Status */}
+            <NetworkStatus />
           </div>
         </Router>
       </AuthProvider>
