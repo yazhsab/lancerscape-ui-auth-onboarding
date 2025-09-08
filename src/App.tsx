@@ -14,8 +14,23 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { DashboardPage } from './pages/DashboardPage';
 
 function App() {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
   return (
-    <GoogleOAuthProvider clientId="your-google-client-id">
+    <>
+      {googleClientId ? (
+        <GoogleOAuthProvider clientId={googleClientId}>
+          <AppContent />
+        </GoogleOAuthProvider>
+      ) : (
+        <AppContent />
+      )}
+    </>
+  );
+}
+
+function AppContent() {
+  return (
       <AuthProvider>
         <Router>
           <div className="App">
@@ -99,7 +114,6 @@ function App() {
           </div>
         </Router>
       </AuthProvider>
-    </GoogleOAuthProvider>
   );
 }
 

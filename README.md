@@ -84,8 +84,13 @@ Visit the live application: [https://authentication-onboa-nxe7.bolt.host](https:
    Create a `.env` file in the root directory:
    ```env
    VITE_API_BASE_URL=http://ec2-3-238-114-176.compute-1.amazonaws.com:3000
-   VITE_GOOGLE_CLIENT_ID=your-google-client-id
+   VITE_GOOGLE_CLIENT_ID=your-google-oauth-client-id
    ```
+
+   **Important Notes:**
+   - The backend is running on HTTP, which may cause mixed content issues when deployed on HTTPS
+   - For production, consider setting up SSL/TLS on your backend server
+   - Google OAuth requires a valid client ID to function properly
 
 4. **Start development server**
    ```bash
